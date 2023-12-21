@@ -1,54 +1,95 @@
 public class Main {
     public static void main(String[] args) {
-        Employee[] employee = new Employee[5];
-        employee[0] = new Employee("Иванов", "Иван", "Иванович", 1, 30_000);
-        employee[1] = new Employee("Петров", "Петр", "Петрович", 2, 40_000);
-        employee[2] = new Employee("Семенов", "Семен", "Семенович", 3, 25_000);
-        employee[3] = new Employee("Степанов", "Степан", "Степанович", 4, 15_000);
-        employee[4] = new Employee("Константинов", "Константин", "Константинович", 5, 20_000);
-        for (Employee value : employee) {
-            System.out.println(value);
-        }
-        employee[0].setSalary(100);
-        employee[0].setDepartment(1);
-        System.out.println("employee[0].getSalary()= " + employee[0].getSalary());
-        System.out.println("employee[0].getDepartment()= " + employee[0].getDepartment());
+        System.out.println("Hello world!");
+        Employee[] employee = new Employee[10];
+        employee[0] = new Employee(" Иванов Сергей Иванович   ", 1, 15000);
+        employee[1] = new Employee(" Смирнов Сергей Анатольевич   ", 2, 20000);
+        employee[2] = new Employee(" Назарова Любовь Юрьевна   ", 3, 25000);
+        employee[3] = new Employee(" Сидоров Константин Константинович   ", 4, 29000);
+        employee[4] = new Employee(" Петров Сергей Николаевич   ", 5, 29900);
+        employee[5] = new Employee(" Костин Андрей Сергеевич   ", 1, 16000);
+        employee[6] = new Employee(" Емельянов Евгений Васильевич  ", 2, 18000);
+        employee[7] = new Employee(" Сорокина Галина Серьгеевна  ", 3, 21000);
+        employee[8] = new Employee(" Елисеева Светлана Викторовна   ", 3, 12000);
+        employee[9] = new Employee(" Тарасова Раиса Михайловна   ", 5, 22000);
+        for (Employee e : employee) {
+            System.out.println(e);
 
-        int[] salary = {30_000, 40_000, 25_000, 15_000, 20_000};
-        int maxSalary = 0;
-        int minSalary = 40_000;
-        compareSum(maxSalary, minSalary, salary);
+            System.out.println(calculateTheAmountOfSalaryCostsPerMonth(employee));
+
+
+        }
+
+        findAnEmployeeWithTheMinimumWage(employee);
+
+        findTheEmployeeWithTheHighestSalary(employee);
+        calculateTheAverageSalary(employee);
+        getTheFullNameOfAllEmployees(employee);
+
+
+
+    }
+
+
+    public static int calculateTheAmountOfSalaryCostsPerMonth(Employee[] employee) {
         int sum = 0;
-        addedUpTheAmounts(sum, salary);
-        calculatedTheAverageAmount(salary);
+        for (Employee e : employee) {
+            sum += e.getSalary();
+        }
+
+        return sum;
     }
 
-    private static void calculatedTheAverageAmount(int[] salary) {
-        int sum = 0;
-        for (int i: salary) {
-            sum += i;
-        }
-        sum=sum/salary.length;
-        System.out.println("Cредняя заробатная  плата : " + sum);
-    }
-    private static void compareSum(int maxSalary, int minSalary, int[] salary) {
-        for (int j : salary) {
-            if (j > maxSalary) {
-                maxSalary = j;
+
+    public static void findAnEmployeeWithTheMinimumWage(Employee[] employee) {
+        Employee result=null;
+        double min= Double.MAX_VALUE;
+        for (Employee e : employee) {
+            if (e != null && e.getSalary() < min) {
+                result = e;
+                min=e.getSalary();
+
+
+
             }
-            if (j < minSalary) {
-                minSalary = j;
-            }
+
         }
-        System.out.println("Минимальная заработная плата- " + minSalary);
-        System.out.println("Максимальная заработная плата- " + maxSalary);
+        System.out.println("Сотрудник с минимальной заработной платой -" + result.getFio());
     }
 
-    private static void addedUpTheAmounts(int sum1,int[] salary) {
-        for (int j : salary) {
-            sum1 = sum1 + j;
+
+    public static void findTheEmployeeWithTheHighestSalary(Employee[] employee) {
+        Employee result = null;
+        double max = 0;
+        for (Employee e : employee) {
+            if (e != null && e.getSalary() > max) {
+                result = e;
+                max=e.getSalary();
+
+
+            }
+
         }
-        System.out.println("Общая сумм заработных плат: "+sum1);
+        System.out.println("Сотрудник с максимальной заработной платой -" + result.getFio());
     }
+
+    public static void calculateTheAverageSalary(Employee[] employee) {
+        double sum = 0;
+        for (Employee e : employee) {
+            sum += e.getSalary();
+        }
+        double averageSalary = sum / (employee.length);
+
+        System.out.println("Среднее значение зарплат " + averageSalary + " руб");
+    }
+
+
+    public static void getTheFullNameOfAllEmployees(Employee[] employee) {
+        for (Employee e : employee) {
+            System.out.println(e.getFio());
+        }
+    }
+
+
 
 }
